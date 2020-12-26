@@ -18,11 +18,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import SearchIcon from '@material-ui/icons/Search';
+import PeopleIcon from '@material-ui/icons/People';
+import SendIcon from '@material-ui/icons/Send';
 import Button from '@material-ui/core/Button';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -123,16 +126,8 @@ export default function MiniDrawer() {
           </IconButton>
           <HomeRoundedIcon/>
           <Typography variant="h6" noWrap style={{marginLeft:"10px"}}>
-            f1ndus.online
+            Hey (User) !
           </Typography>
-          
-
-    
-      <Link to="/user/login" style={{marginLeft:"80%"}}>
-        <button style={{backgroundColor:"palevioletred" , fontSize:"20px", cursor:"pointer"}}>login</button>
-      </Link>
-      
-
         </Toolbar>
       </AppBar>
       <Drawer
@@ -155,22 +150,15 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Find Experiances', 'Are you an experiance?'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index=== 0 ? <SearchIcon /> : <PeopleIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+       
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

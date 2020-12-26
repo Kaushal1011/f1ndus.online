@@ -1,0 +1,36 @@
+#map{
+    background-color: rgb(155, 111, 111);
+    display:block;
+    overflow:hidden;
+    width: 90%; 
+    height: 470px;  
+    position: relative;
+    margin-left: 7.5%;
+}
+#filter{
+    margin-left: 95%;
+    color:antiquewhite;
+    cursor: pointer;
+    
+}
+    .container {
+    display: flex;
+    flex-wrap: wrap;
+    height:200px;
+    margin-left: 7.5%;
+    margin-right: 2.2%;
+    margin-top: 2%;
+    margin-bottom: 200px;
+    
+  }
+  
+  .container > div {
+    background-color: #cbbeeb;
+    width: 40%;
+    margin: 10px;
+    margin-left: 83px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+    height:200px;
+  }

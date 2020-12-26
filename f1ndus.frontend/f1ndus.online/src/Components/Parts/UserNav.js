@@ -150,9 +150,9 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Find Experiances', 'Are you an experiance?'].map((text, index) => (
+          {['Find Experiances', 'Are you an experiance?',"Quick Search"].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index=== 0 ? <SearchIcon /> : <PeopleIcon />}</ListItemIcon>
+              <ListItemIcon>{index%2=== 0? <SearchIcon /> : <PeopleIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}

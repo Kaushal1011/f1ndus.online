@@ -3,6 +3,7 @@ import Home from "./Components/Screens/Home";
 import Login from "./Components/Screens/Login";
 import Signup from "./Components/Screens/Signup"; 
 import Dashboard from "./Components/Screens/dashboard";
+import Search from "./Components/Screens/Search";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 function App(){
@@ -20,6 +21,9 @@ function App(){
       </Route>
       <Route path="/user/dashboard">
         <Dashboard />
+      </Route>
+      <Route path="/user/search">
+        <Search />
       </Route>
     </Switch>
   </BrowserRouter>

@@ -26,7 +26,7 @@ SECRET_KEY = 'n5dap5pil$66%gphbw*ps$f5ooqh^48+mn9jtcgbq1)a-f2m6!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,13 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'backend_app.apps.BackendAppConfig',
-    'django.contrib.gis'
+    'corsheaders'
+    # 'django.contrib.gis'
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -85,15 +87,15 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': '57648',
+        'PORT': '26257',
         # If connecting with SSL, remove the PASSWORD entry above and include
         # the section below, replacing the file paths as appropriate.
-        'OPTIONS': {
-            'sslmode': 'require',
-            'sslrootcert': '/certs/ca.crt',
-            'sslcert': '/certs/client.myprojectuser.crt',
-            'sslkey': '/certs/client.myprojectuser.key',
-        },
+        # 'OPTIONS': {
+        #     'sslmode': 'require',
+        #     'sslrootcert': '/certs/ca.crt',
+        #     'sslcert': '/certs/client.myprojectuser.crt',
+        #     'sslkey': '/certs/client.myprojectuser.key',
+        # },
     },
     # 'default':
     #     {
@@ -113,7 +115,6 @@ DATABASES = {
     #     },
     #  }
 }
-
 
 
 # Password validation
@@ -153,5 +154,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+CORS_ORIGIN_ALLOW_ALL = True

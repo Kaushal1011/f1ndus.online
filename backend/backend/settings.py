@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users.apps.UserConfig'
+    'backend_app.apps.BackendAppConfig',
+    'django.contrib.gis'
+
 ]
 
 MIDDLEWARE = [
@@ -74,12 +77,43 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django_cockroachdb',
+        'NAME': 'f1ndus',
+        'USER': 'root',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '57648',
+        # If connecting with SSL, remove the PASSWORD entry above and include
+        # the section below, replacing the file paths as appropriate.
+        'OPTIONS': {
+            'sslmode': 'require',
+            'sslrootcert': '/certs/ca.crt',
+            'sslcert': '/certs/client.myprojectuser.crt',
+            'sslkey': '/certs/client.myprojectuser.key',
+        },
+    },
+    # 'default':
+    #     {
+    #     'NAME': 'f1ndus',
+    #     'ENGINE': 'django.contrib.gis.db.backends.postgis',
+    #     'USER': 'root',
+    #     'PASSWORD': 'admin',
+    #     'HOST': 'localhost',
+    #     'PORT': '57648',
+    #     # If connecting with SSL, remove the PASSWORD entry above and include
+    #     # the section below, replacing the file paths as appropriate.
+    #     'OPTIONS': {
+    #         'sslmode': 'require',
+    #         'sslrootcert': '/certs/ca.crt',
+    #         'sslcert': '/certs/client.myprojectuser.crt',
+    #         'sslkey': '/certs/client.myprojectuser.key',
+    #     },
+    #  }
 }
+
 
 
 # Password validation
@@ -119,3 +153,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

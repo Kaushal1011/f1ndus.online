@@ -15,6 +15,7 @@ import YourInfo from "../Parts/AreYouAnExp/Info";
 import Location from "../Parts/AreYouAnExp/Location";
 import Review from "../Parts/AreYouAnExp/Review";
 import UserNav from "../Parts/UserNav";
+import { server_addr } from "../../config.js";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -55,23 +56,64 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ["Your Information", "Location", "Review "];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <YourInfo />;
-    case 1:
-      return <Location />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error("Unknown step");
-  }
-}
-
 export function Ruexp() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [userName, setuserName] = React.useState(0);
+  const [password, setpassword] = React.useState(0);
+  const [Type, setType] = React.useState(0);
+  const [Description, setDescription] = React.useState(0);
+  const [lat, setlat] = React.useState(0);
+  const [long, setlong] = React.useState(0);
+  const [locationName, setlocationName] = React.useState(0);
+  const [photourl, setPhotourl] = React.useState(
+    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F297378381615706224%2F&psig=AOvVaw3F5ShJritBrcQRdBHI2LI4&ust=1609159413975000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjpqo2Y7u0CFQAAAAAdAAAAABAD"
+  );
 
+  // function CbYourInfo(type, desc) {
+  //   setType(type);
+  //   setDescription(desc);
+  //   console.log(type);
+  // }
+  // function CbLocation(lat, long) {
+  //   setlat(lat);
+  //   setlong(long);
+  // }
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return (
+          <YourInfo
+            userNamechange={setuserName}
+            passwordchange={setpassword}
+            typechange={setType}
+            descchange={setDescription}
+          />
+        );
+      case 1:
+        return (
+          <Location
+            latchange={setlat}
+            longchange={setlong}
+            locationNamechange={setlocationName}
+          />
+        );
+      case 2:
+        return (
+          <Review
+            userName={userName}
+            password={password}
+            type={Type}
+            desc={Description}
+            lsName={locationName}
+            photourl={photourl}
+          />
+        );
+      default:
+        throw new Error("Unknown step");
+    }
+  }
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -100,13 +142,38 @@ export function Ruexp() {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  Thank you .
                 </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    const apiUrl = `http://${server_addr}/api/v1/post`;
+                    const requestOptions = {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        username: userName,
+                        type: Type,
+                        description: Description,
+                        location_name: locationName,
+                        long: long,
+                        lat: lat,
+                        activeuntil: Date.now() + 60000,
+                        activefrom: Date.now(),
+                        image: photourl,
+                      }),
+                    };
+                    fetch(apiUrl, requestOptions)
+                      .then((response) => response.json())
+                      .then((data) => {
+                        console.log(data);
+                      });
+                  }}
+                  className={classes.button}
+                >
+                  Book Slot
+                </Button>
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -123,7 +190,7 @@ export function Ruexp() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? "Place order" : "Next"}
+                    Next
                   </Button>
                 </div>
               </React.Fragment>

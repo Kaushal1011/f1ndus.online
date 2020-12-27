@@ -1,1 +1,1 @@
-export const server_addr = "192.168.0.212:8000";
+export const server_addr = "34.67.203.23:8000";

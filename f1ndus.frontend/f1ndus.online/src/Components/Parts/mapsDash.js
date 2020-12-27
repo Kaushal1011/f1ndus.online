@@ -19,12 +19,21 @@ const MapContainer = (props) => {
         lng: props.long,
       }}
     >
-      <Marker
-        position={{
-          lat: props.lat,
-          lng: props.long,
-        }}
-      />
+      {props.list.map((listElement) => {
+        console.log(listElement);
+        return (
+          <Marker
+            position={{
+              lat: listElement[1],
+              lng: listElement[0],
+            }}
+            label={listElement[4]}
+            onClick={() => {
+              console.log("marker clicked");
+            }}
+          />
+        );
+      })}
     </Map>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "../Parts/Dashboard.css";
 import UserNav from "../Parts/UserNav";
-import Gmap from "../Parts/maps";
+import Gmap from "../Parts/mapsDash";
 import FilterListTwoToneIcon from "@material-ui/icons/FilterListTwoTone";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
@@ -25,12 +25,19 @@ const Dashboard = () => {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ long: long, lat: lat, activeuntil: Date.now() }),
+        body: JSON.stringify({
+          long: position.coords.longitude,
+          lat: position.coords.latitude,
+          activeuntil: Date.now(),
+        }),
       };
       fetch(apiUrl, requestOptions)
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          console.log(long);
+          console.log(lat);
+          setLoclist(data);
         });
     });
   }, []);
@@ -43,7 +50,7 @@ const Dashboard = () => {
     <>
       <UserNav />
       <div id="map">
-        <Gmap />
+        <Gmap lat={lat} long={long} list={loclist} />
       </div>
       <div className="container">
         <div>info</div>

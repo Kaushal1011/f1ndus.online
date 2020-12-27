@@ -20,11 +20,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddressForm() {
+export default function AddressForm(props) {
   const classes = useStyles();
   return (
     <React.Fragment>
       <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="UserName"
+            name="UserName"
+            label="User Name"
+            fullWidth
+            autoComplete="UserName"
+            onChange={(e) => {
+              props.userNamechange(e.target.value);
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="Password"
+            name="Password"
+            label="Password"
+            fullWidth
+            autoComplete="Password"
+            onChange={(e) => {
+              props.passwordchange(e.target.value);
+            }}
+          />
+        </Grid>
         <Grid item xs={12}>
           <TextField
             required
@@ -33,6 +59,9 @@ export default function AddressForm() {
             label="Type"
             fullWidth
             autoComplete="Job Type"
+            onChange={(e) => {
+              props.typechange(e.target.value);
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -43,6 +72,9 @@ export default function AddressForm() {
             label="Description"
             fullWidth
             autoComplete="Description"
+            onChange={(e) => {
+              props.descchange(e.target.value);
+            }}
           />
         </Grid>
 
@@ -53,6 +85,9 @@ export default function AddressForm() {
             id="contained-button-file"
             multiple
             type="file"
+            onChange={(e) => {
+              console.log(e.target);
+            }}
           />
           <label htmlFor="contained-button-file">
             <Button variant="contained" color="primary" component="span">

@@ -30,6 +30,7 @@ const MapContainer = (props) => {
             label={listElement[4]}
             onClick={() => {
               console.log("marker clicked");
+              props.selectedInfo(listElement);
             }}
           />
         );

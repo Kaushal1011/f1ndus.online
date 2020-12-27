@@ -1,4 +1,5 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import "../Parts/Dashboard.css";
 import UserNav from "../Parts/UserNav";
@@ -7,14 +8,24 @@ import FilterListTwoToneIcon from "@material-ui/icons/FilterListTwoTone";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { server_addr } from "../../config.js";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const Dashboard = () => {
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
   const [loclist, setLoclist] = useState([]);
-  const [displayInfo, setDisplayinfo] = useState({});
+  const [selectedInfo, setSelectedinfo] = useState({});
   const [imageurl, setImageurl] = useState("");
-
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      width: "100%",
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper,
+    },
+  }));
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log("Latitude is :", position.coords.latitude);
@@ -50,10 +61,30 @@ const Dashboard = () => {
     <>
       <UserNav />
       <div id="map">
-        <Gmap lat={lat} long={long} list={loclist} />
+        <Gmap
+          lat={lat}
+          long={long}
+          list={loclist}
+          selectedInfo={setSelectedinfo}
+        />
       </div>
       <div className="container">
-        <div>info</div>
+        <div>
+          <List component="nav" aria-label="secondary mailbox folders">
+            <ListItem>
+              <ListItemText primary={selectedInfo[6]} />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary={selectedInfo[7]} />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary={selectedInfo[4]} />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary={selectedInfo[3]} />
+            </ListItem>
+          </List>
+        </div>
         <div>
           <Carousel showThumbs={false}>
             <div>

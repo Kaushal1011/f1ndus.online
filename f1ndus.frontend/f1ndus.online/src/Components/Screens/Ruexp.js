@@ -159,7 +159,7 @@ export function Ruexp() {
                         location_name: locationName,
                         long: long,
                         lat: lat,
-                        activeuntil: Date.now() + 60000,
+                        activeuntil: Date.now() + 200000000000,
                         activefrom: Date.now(),
                         image: photourl,
                       }),

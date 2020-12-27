@@ -59,8 +59,8 @@ class ImagePost(APIView):
     @staticmethod
     def post(request):
         image = request.data['File']
-        Files.objects.create(image=image)
-        return Response('Done')
+        file = Files.objects.create(image=image)
+        return Response(file.image.url)
 
 
 # Raw sql stuff location based queries because cockroachdb driver doesnt support this

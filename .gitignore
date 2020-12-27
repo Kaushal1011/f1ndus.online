@@ -103,6 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+*.pyc
+*.png
+
 node1
 node2
 node3

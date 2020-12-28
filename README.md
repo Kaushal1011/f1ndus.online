@@ -1,6 +1,8 @@
 # f1ndus.online
 people are just more than employees, students, or performers. They are experiences! f1ndus.online!
 
+[Live Version](http://www.fiind.us) : Cannot access your location because http blocks it, however your location will be set to somewhere in Gujarat,India for Demo Purposes
+
 [Youtube Demo](https://www.youtube.com/watch?v=K1_abfXAOxk&t=1s)
 
 [Devpost Submission](https://devpost.com/software/fiind-us)

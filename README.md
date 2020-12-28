@@ -2,6 +2,7 @@
 people are just more than employees, students, or performers. They are experiences! f1ndus.online!
 
 [Youtube Demo](https://www.youtube.com/watch?v=K1_abfXAOxk&t=1s)
+
 [Devpost Submission](https://devpost.com/software/fiind-us)
 
 ## Inspiration
